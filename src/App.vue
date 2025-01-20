@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import { supabase } from '@/lib/supabaseClient'
-console.log(supabase)
+// import { supabase } from '@/lib/supabaseClient'
+// console.log('111', supabase)
 </script>
 
 <template>
