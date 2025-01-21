@@ -1,25 +1,23 @@
 <script setup lang="ts">
 import { supabase } from '@/lib/supabaseClient'
-import { ref, h } from 'vue'
 import type { Tables } from '../../../database/types'
 import type { ColumnDef } from '@tanstack/vue-table'
-import DataTable from '@/components/ui/data-table/DataTable.vue'
 import { RouterLink } from 'vue-router'
+
+usePageStore().pageData.title = 'Projects'
 const projects = ref<Tables<'projects'>[] | null>(null)
 
-;(async () => {
-  const getProjects = async () => {
-    console.log('Getting projects...')
-    const { data, error } = await supabase.from('projects').select()
+const getProjects = async () => {
+  console.log('Getting projects...')
+  const { data, error } = await supabase.from('projects').select()
 
-    if (error) {
-      console.error(error)
-      return
-    }
-    projects.value = data
+  if (error) {
+    console.error(error)
+    return
   }
-  await getProjects()
-})()
+  projects.value = data
+}
+await getProjects()
 
 const columns: ColumnDef<Tables<'projects'>>[] = [
   {
@@ -58,8 +56,6 @@ const columns: ColumnDef<Tables<'projects'>>[] = [
 </script>
 <template>
   <div>
-    <h1>Projects Page</h1>
-    <RouterLink to="/">To Home</RouterLink>
     <DataTable v-if="projects" :columns="columns" :data="projects" />
   </div>
 </template>
