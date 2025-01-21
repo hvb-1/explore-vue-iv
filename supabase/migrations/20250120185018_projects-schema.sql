@@ -9,6 +9,7 @@ create table
     created_at timestamptz not null default now(),
     name text not null,
     slug text unique not null,
+    description text,
     status current_status not null default 'in-progress'::current_status,
     collaborators text array default array[]::varchar[] not null 
   );

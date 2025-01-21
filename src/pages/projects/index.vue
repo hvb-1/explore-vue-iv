@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { supabase } from '@/lib/supabaseClient'
-import type { Tables } from '../../../database/types'
-import type { ColumnDef } from '@tanstack/vue-table'
-import { RouterLink } from 'vue-router'
+import { projectsQuery, type Projects } from '@/utils/supaQueries'
+import { columns } from '@/utils/tableColumns/projectsColumns'
 
 usePageStore().pageData.title = 'Projects'
-const projects = ref<Tables<'projects'>[] | null>(null)
+const projects = ref<Projects | null>(null)
 
 const getProjects = async () => {
   console.log('Getting projects...')
-  const { data, error } = await supabase.from('projects').select()
+  const { data, error } = await projectsQuery
 
   if (error) {
     console.error(error)
@@ -18,41 +16,6 @@ const getProjects = async () => {
   projects.value = data
 }
 await getProjects()
-
-const columns: ColumnDef<Tables<'projects'>>[] = [
-  {
-    accessorKey: 'name',
-    header: () => h('div', { class: 'text-left' }, 'Name'),
-    cell: ({ row }) => {
-      return h(
-        RouterLink,
-        {
-          to: `/projects/${row.original.slug}`,
-          class: 'text-left font-medium block w-full hover:bg-muted',
-        },
-        () => row.getValue('name'),
-      )
-    },
-  },
-  {
-    accessorKey: 'status',
-    header: () => h('div', { class: 'text-left' }, 'Status'),
-    cell: ({ row }) => {
-      return h('div', { class: 'text-left font-medium' }, row.getValue('status'))
-    },
-  },
-  {
-    accessorKey: 'collaborators',
-    header: () => h('div', { class: 'text-left' }, 'Collaborators'),
-    cell: ({ row }) => {
-      return h(
-        'div',
-        { class: 'text-left font-medium' },
-        JSON.stringify(row.getValue('collaborators')),
-      )
-    },
-  },
-]
 </script>
 <template>
   <div>
