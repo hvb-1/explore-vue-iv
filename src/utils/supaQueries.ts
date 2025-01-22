@@ -36,3 +36,7 @@ export type Project = QueryData<ReturnType<typeof projectQuery>>
 export const taskQuery = (id: string) =>
   supabase.from('tasks').select(`*, projects(id, name, slug)`).eq('id', id).single()
 export type Task = QueryData<ReturnType<typeof taskQuery>>
+
+export const profileQuery = (id: string) => {
+  return supabase.from('profiles').select('*').eq('id', id).single()
+}

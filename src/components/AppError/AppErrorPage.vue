@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { useErrorStore } from '@/stores/error'
-import AppErrorDevSection from './AppErrorDevSection.vue'
-import AppErrorProdSection from './AppErrorProdSection.vue'
 
 const router = useRouter()
 

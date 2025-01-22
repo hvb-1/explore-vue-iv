@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import AppErrorPage from './components/AppError/AppErrorPage.vue'
+
 import { useErrorStore } from './stores/error'
 
 const errorStore = useErrorStore()
-//const { activeError } = storeToRefs(useErrorStore())
 
 onErrorCaptured((error) => {
   errorStore.setError({ error })
 })
+
+onMounted(async () => {})
 </script>
 
 <template>

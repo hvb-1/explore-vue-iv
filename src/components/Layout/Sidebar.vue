@@ -19,6 +19,10 @@ const links = [
 
 const accountLinks = [
   {
+    title: 'Chat',
+    icon: 'lucide:message-circle',
+  },
+  {
     title: 'Profile',
     icon: 'lucide:user',
     to: '/profile',
@@ -31,7 +35,6 @@ const accountLinks = [
   {
     title: 'Sign out',
     icon: 'lucide:log-out',
-    to: '/signout',
   },
 ]
 </script>
