@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import AppErrorPage from './components/AppError/AppErrorPage.vue'
+import { supabase } from './lib/supabaseClient'
+import { useAuthStore } from './stores/auth'
 
 import { useErrorStore } from './stores/error'
 
@@ -9,7 +11,9 @@ onErrorCaptured((error) => {
   errorStore.setError({ error })
 })
 
-onMounted(async () => {})
+onMounted(() => {
+  useAuthStore().trackAuthChanges()
+})
 </script>
 
 <template>
