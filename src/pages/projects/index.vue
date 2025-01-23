@@ -11,7 +11,7 @@ const { getProjects } = projectsLoader
 await getProjects()
 
 const { getGroupedCollabs, groupedCollabs } = useCollabs()
-getGroupedCollabs(projects.value)
+getGroupedCollabs(projects.value ?? [])
 //const test = await getProfilesByIds(projects.value[0].collaborators)
 
 //console.log('TEST :: ', test)
