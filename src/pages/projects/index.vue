@@ -17,6 +17,9 @@ getGroupedCollabs(projects.value ?? [])
 //console.log('TEST :: ', test)
 const columnsWithCollabs = columns(groupedCollabs)
 // getGroupedCollabs(projects.value)
+useMeta({
+    title: 'Projects |Learn Vue 3',
+})
 </script>
 
 <template>

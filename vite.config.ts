@@ -11,47 +11,50 @@ import Components from 'unplugin-vue-components/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  css: {
-    postcss: {
-      plugins: [tailwind(), autoprefixer()],
-    },
-  },
-  plugins: [
-    VueRouter(),
-    vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag.startsWith('iconify-icon'),
+    css: {
+        postcss: {
+            plugins: [tailwind(), autoprefixer()],
         },
-      },
-    }),
-    vueDevTools(),
-    AutoImport({
-      include: [
-        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-        /\.vue$/,
-        /\.vue\?vue/, // .vue
-        /\.md$/, // .md
-      ],
-      imports: [
-        // presets
-        'vue',
-        VueRouterAutoImports,
-        {
-          pinia: ['defineStore', 'storeToRefs', 'acceptHMRUpdate'],
-        },
-      ],
-      dts: true,
-      viteOptimizeDeps: true,
-      dirs: ['src/stores/**', 'src/composables/**'],
-    }),
-    Components({
-      /* options */
-    }),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-  },
+    plugins: [
+        VueRouter(),
+        vue({
+            template: {
+                compilerOptions: {
+                    isCustomElement: (tag) => tag.startsWith('iconify-icon'),
+                },
+            },
+        }),
+        vueDevTools(),
+        AutoImport({
+            include: [
+                /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+                /\.vue$/,
+                /\.vue\?vue/, // .vue
+                /\.md$/, // .md
+            ],
+            imports: [
+                // presets
+                'vue',
+                VueRouterAutoImports,
+                {
+                    pinia: ['defineStore', 'storeToRefs', 'acceptHMRUpdate'],
+                },
+                {
+                    'vue-meta': ['useMeta'],
+                },
+            ],
+            dts: true,
+            viteOptimizeDeps: true,
+            dirs: ['src/stores/**', 'src/composables/**'],
+        }),
+        Components({
+            /* options */
+        }),
+    ],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url)),
+        },
+    },
 })
